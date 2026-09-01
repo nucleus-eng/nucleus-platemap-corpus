@@ -14,11 +14,13 @@ failure — either in real bench data or as a synthetic adversarial case.
 ```
 manifest.yaml          index of all fixtures and their expected findings
 fixtures/
-  synthetic/           generated files — mutate a clean platemap to trigger
-                       one blocking rule each; no disclosure issue
-  platereader/         real platereader bench sheets (once cleared)
-  microscope/          real microscopy bench sheets (once cleared)
+  real/                real bench sheets — added once disclosure is confirmed
+  synthetic/           deliberately broken files, generated from a clean base
 ```
+
+`manifest.yaml` records instrument, plate format, and which checks each file
+exercises. The directory structure doesn't encode that — a single file can
+cover both platereader and microscopy readouts from the same experiment.
 
 ## Adding a fixture
 
@@ -31,14 +33,14 @@ fixtures/
      data by hand; gates CI
    - `asserted` — one agent's output, not yet independently checked; never
      gates CI
-3. Add the file to `fixtures/` and update `path` in the manifest.
+3. Add the file to `fixtures/real/` or `fixtures/synthetic/` and update
+   `path` in the manifest.
 4. Do not add files because they look representative. Each case should have
-   a row in the errors-found log in `PLATEMAP-STAGING.md` or a new finding
-   that justifies it.
+   a specific finding that justifies it.
 
 ## Disclosure
 
-Real bench data goes in `fixtures/platereader/` or `fixtures/microscope/`
-only after the data owner has confirmed it can be public. Until then the
-manifest entry exists with `disclosure: pending` and `path: pending` —
-recording the intent without moving the data.
+Real bench data goes in `fixtures/real/` only after the data owner has
+confirmed it can be public. Until then the manifest entry exists with
+`disclosure: pending` and `path: pending` — recording the intent without
+moving the data.
