@@ -1,0 +1,32 @@
+Date,Experiment,Well,Name,Type,Rxn Volume (uL)
+2026-09-01 00:00:00,20260901-platemap-setup-test,E1,Nucleus PURE,Sample,10.0
+2026-09-02 00:00:00,20250311-platemap-setup-test,E2,Nucleus PURE,Sample,10.0
+2026-09-03 00:00:00,20250311-platemap-setup-test,E3,Nucleus PURE,Sample,10.0
+2026-09-04 00:00:00,20250311-platemap-setup-test,F1,NEB PURExpress,Positive Control,10.0
+2026-09-05 00:00:00,20250311-platemap-setup-test,F2,NEB PURExpress,Positive Control,10.0
+2026-09-06 00:00:00,20250311-platemap-setup-test,F3,NEB PURExpress,Positive Control,10.0
+2026-09-07 00:00:00,20250311-platemap-setup-test,G1,Fluorescein,Standard,10.0
+2026-09-08 00:00:00,20250311-platemap-setup-test,G2,Fluorescein,Standard,10.0
+2026-09-09 00:00:00,20250311-platemap-setup-test,G3,Fluorescein,Standard,10.0
+,,,,,
+,,,,,
+,,,,,
+Rxn Volume,10.0,,Nucleus PURE,,
+,,,Component,Sample,
+,,,SMix,3.0,
+,,,PMix,1.2,
+,,,Ribosome,1.8,
+,,,tRNA,1.0,
+,,,RNase Inhibitor,0.5,
+,,,pOpen-T7-deGFP (XX conc.),0.5,
+,,,Nucleus free H2O,2,
+,,,Total,10,
+,,,,,
+,,,NEB PURExpress,,
+,,,Component,Sample,
+,,,Sol A,4.0,
+,,,Sol B,3.0,
+,,,RNase Inhibitor,0.5,
+,,,pOpen-T7-deGFP (XX conc.),0.5,
+,,,Nucleus free H2O,2,
+,,,Total,10,

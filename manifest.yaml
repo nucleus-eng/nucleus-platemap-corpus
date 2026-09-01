@@ -86,7 +86,8 @@ corpus:
         tier: confirmed
         expected: blocking
 
-  - path: fixtures/real/dry-run-platemap-date-increment.xlsx
+  - path: fixtures/real/dry-run-platemap-date-increment.csv
+    source_xlsx: fixtures/real/dry-run-platemap-date-increment.xlsx
     disclosure: cleared
     origin: "dry-run platemap, 2026-09-01"
     instruments: [platereader]
@@ -114,22 +115,20 @@ corpus:
         expected: warn
         note: "pOpen-T7-deGFP (XX conc.) — concentration not filled in"
 
-  - path: fixtures/real/tetR-atc-liposome-grid.xlsx
+  - path: fixtures/real/tetR-atc-liposome-grid-platemap.csv
+    source_xlsx: fixtures/real/tetR-atc-liposome-grid.xlsx
     disclosure: cleared
     origin: "Liposomes in M9 media Test 05, 2025-02-27"
     instruments: [platereader]
     plate_format: 96
     added_for: >
-      Two-sheet xlsx: build (recipe) + platemap-2 (spatial grid). The
-      first grid-format platemap in the corpus — exercises grid-to-platemap.py.
+      Grid-format platemap (platemap-2 sheet) — exercises grid-to-platemap.py.
       Multiple stacked attribute grids (condition, [tetR], [aTc], aTc OS/IS,
       lipids, OS-glucose, DNA volume) over a partial plate (columns 2–7,
       rows A–E, with C3–C7 unused and D/E rows having N/A for liposome
-      attributes). Also the first file with explicit, well-structured IS/OS
-      labelling (aTc OS/IS column) — the correct counterpart to the ambiguous
-      case in clpxp-nucleus-cytosol-bulk-and-cells.csv. Build sheet master
-      mix is scaled ~4.4× per-sample rather than 4× (intentional dead volume
-      overage, but flaggable).
+      attributes). First file with explicit, well-structured IS/OS labelling
+      (aTc OS/IS column) — the correct counterpart to the ambiguous case in
+      clpxp-nucleus-cytosol-bulk-and-cells.csv.
     findings:
       - check: grid_to_platemap_parseable
         tier: confirmed
@@ -137,7 +136,20 @@ corpus:
       - check: well_coverage
         tier: confirmed
         expected: pass
-        note: "C3–C7 None cells are legitimately unused wells, not missing data"
+        note: "C3–C7 empty cells are legitimately unused wells, not missing data"
+
+  - path: fixtures/real/tetR-atc-liposome-grid-build.csv
+    source_xlsx: fixtures/real/tetR-atc-liposome-grid.xlsx
+    disclosure: cleared
+    origin: "Liposomes in M9 media Test 05, 2025-02-27"
+    instruments: [platereader]
+    plate_format: 96
+    added_for: >
+      Recipe/build sheet from the same experiment as
+      tetR-atc-liposome-grid-platemap.csv. Master mix scaled ~4.4× per-sample
+      rather than 4× — intentional dead volume overage, but flaggable by
+      scale-recipe.py.
+    findings:
       - check: mastermix_scaling_consistency
         tier: asserted
         expected: warn
