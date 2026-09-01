@@ -86,6 +86,34 @@ corpus:
         tier: confirmed
         expected: blocking
 
+  - path: fixtures/real/dry-run-platemap-date-increment.xlsx
+    disclosure: cleared
+    origin: "dry-run platemap, 2026-09-01"
+    instruments: [platereader]
+    plate_format: 96
+    added_for: >
+      First CDK-format platemap in the corpus (Date, Experiment, Well,
+      Name, Type, Rxn Volume columns). Date column increments one day per
+      row (2026-09-01 through 2026-09-09) across a single experiment —
+      the check-platemap.py finding from the PR. Also has mixed structure:
+      recipe tables embedded below the platemap rows in the same sheet.
+      Placeholder concentration in component name ("XX conc.").
+      Second sheet (platemap-2-claude) is empty — the before/after
+      workflow target for build-platemap.
+    findings:
+      - check: date_column_monotonic
+        tier: confirmed
+        expected: blocking
+        note: "9 consecutive dates across 9 rows of a single experiment"
+      - check: mixed_platemap_and_recipe_in_sheet
+        tier: confirmed
+        expected: warn
+        note: "recipe tables begin at row 11 in the same sheet as the platemap"
+      - check: placeholder_in_component_name
+        tier: asserted
+        expected: warn
+        note: "pOpen-T7-deGFP (XX conc.) — concentration not filled in"
+
   - path: fixtures/real/tetR-atc-liposome-grid.xlsx
     disclosure: cleared
     origin: "Liposomes in M9 media Test 05, 2025-02-27"
