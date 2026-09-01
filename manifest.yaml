@@ -86,6 +86,35 @@ corpus:
         tier: confirmed
         expected: blocking
 
+  - path: fixtures/real/tetR-atc-liposome-grid.xlsx
+    disclosure: cleared
+    origin: "Liposomes in M9 media Test 05, 2025-02-27"
+    instruments: [platereader]
+    plate_format: 96
+    added_for: >
+      Two-sheet xlsx: build (recipe) + platemap-2 (spatial grid). The
+      first grid-format platemap in the corpus — exercises grid-to-platemap.py.
+      Multiple stacked attribute grids (condition, [tetR], [aTc], aTc OS/IS,
+      lipids, OS-glucose, DNA volume) over a partial plate (columns 2–7,
+      rows A–E, with C3–C7 unused and D/E rows having N/A for liposome
+      attributes). Also the first file with explicit, well-structured IS/OS
+      labelling (aTc OS/IS column) — the correct counterpart to the ambiguous
+      case in clpxp-nucleus-cytosol-bulk-and-cells.csv. Build sheet master
+      mix is scaled ~4.4× per-sample rather than 4× (intentional dead volume
+      overage, but flaggable).
+    findings:
+      - check: grid_to_platemap_parseable
+        tier: confirmed
+        expected: pass
+      - check: well_coverage
+        tier: confirmed
+        expected: pass
+        note: "C3–C7 None cells are legitimately unused wells, not missing data"
+      - check: mastermix_scaling_consistency
+        tier: asserted
+        expected: warn
+        note: "4.4× scale factor vs declared 4 reactions — dead volume overage"
+
   - path: fixtures/real/clpxp-nucleus-cytosol-bulk-and-cells.csv
     disclosure: cleared
     origin: "Notion ELN, ClpXP with Nucleus Cytosol, 2026-06-03 data, dry run 2026-09-01"
