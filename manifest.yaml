@@ -7,7 +7,6 @@
 #   path        relative to corpus root once vendored; "pending" if not yet added
 #   disclosure  pending | cleared
 #   origin      where the file came from
-#   owner       who can answer questions about the data
 #   instruments list — platereader, microscope, or both
 #   plate_format 96 | 384 | etc.
 #   added_for   the specific finding or failure mode this file exercises
@@ -29,7 +28,6 @@ corpus:
   - path: pending
     disclosure: pending
     origin: "bench sheet, ClpXP kinetics run, 2026-09"
-    owner: "@yen-yu"
     instruments: [platereader]
     plate_format: 384
     added_for: >
@@ -48,7 +46,6 @@ corpus:
   - path: pending
     disclosure: pending
     origin: "bench sheet, 2026-08"
-    owner: "@yen-yu"
     instruments: [platereader]
     plate_format: 96
     added_for: >
@@ -63,7 +60,6 @@ corpus:
   - path: pending
     disclosure: pending
     origin: "Notion ELN, 2026-09"
-    owner: "@yen-yu"
     instruments: [platereader]
     plate_format: 96
     added_for: >
@@ -78,7 +74,6 @@ corpus:
   - path: pending
     disclosure: pending
     origin: "Notion ELN, 2026-09"
-    owner: "@yen-yu"
     instruments: [platereader]
     plate_format: 96
     added_for: >
