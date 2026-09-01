@@ -86,6 +86,37 @@ corpus:
         tier: confirmed
         expected: blocking
 
+  - path: fixtures/real/clpxp-nucleus-cytosol-bulk-and-cells.csv
+    disclosure: cleared
+    origin: "Notion ELN, ClpXP with Nucleus Cytosol, 2026-06-03 data, dry run 2026-09-01"
+    instruments: [platereader]
+    plate_format: pending
+    added_for: >
+      Two-section bench sheet: Bulk (four condition groups, 10 µL each)
+      and Cells (30 µL). Exercises two cases: (1) IS/OS compartment
+      labelling — the Cells section header reads "Outer solution: 1089 mM
+      Glucose" but the table body contains inner-solution components
+      (SMix, PMix, Ribosome, tRNA); Optiprep's presence is the tell that
+      this is the inner solution, not the outer. (2) Cross-condition
+      component variation — ClpP and ClpX appear as purified protein in
+      some conditions and as DNA template in others; extract-conditions
+      must not collapse these into a single component row.
+    findings:
+      - check: has_well_column
+        tier: confirmed
+        expected: pass
+        note: "No Well column — source material for extract-conditions"
+      - check: compartment_label_consistency
+        tier: confirmed
+        expected: warn
+        note: >
+          Cells header says outer solution but body contains inner-solution
+          components; Optiprep confirms this is the inner solution
+      - check: component_identity_across_conditions
+        tier: asserted
+        expected: warn
+        note: "pOpen-pT7-ClpP-cHis (DNA) vs Purified ClpP (protein) are distinct"
+
   - path: fixtures/real/clpxp-stacked-bench-sheet.csv
     disclosure: cleared
     origin: "Notion ELN, PPK-energy-module / ClpXP-control-module integration, 2026-01-16 data, dry run 2026-09-01"

@@ -1,0 +1,66 @@
+Data on June 3 from: https://app.notion.com/p/b-next/ClpXP-with-Nucleus-Cytosol-374ae616eb5180c1883bc5b525ea3feb?source=copy_link,,,,,
+Bulk,No DNA,,,,
+,Component,Sample 1,Sample 2,Sample 3,Control
+,SMix,3,3,3,3
+,PMix,1.2,1.2,1.2,1.2
+,Ribosome,1.8,1.8,1.8,1.8
+,tRNA,1,1,1,1
+,RNase Inhibitor,0.5,0.5,0.5,0.5
+,Purified deGFP-ssrA (41.2 uM),0.5,0.5,0.5,0.5
+,Purified ClpP (79.9 uM),0.5,0,0.5,0
+,Purified ClpX (53.7 uM),0.5,0.5,0,0
+,Nucleus Free Water,1,1.5,1.5,2
+,Total,10,10,10,10
+,,,,,
+,1 DNA-ClpP,,,,
+,Component,Sample 1,Sample 2,Sample 3,Control
+,SMix,3,3,3,3
+,PMix,1.2,1.2,1.2,1.2
+,Ribosome,1.8,1.8,1.8,1.8
+,tRNA,1,1,1,1
+,RNase Inhibitor,0.5,0.5,0.5,0.5
+,Purified deGFP-ssrA (41.2 uM),0.5,0.5,0.5,0
+,pOpen-pT7-ClpP-cHis (40 nM),0.5,1,1.5,0
+,Purified ClpX (53.7 uM),0.5,0.5,0.5,0.5
+,Nucleus Free Water,1,0.5,0,2
+,Total,10,10,10,10
+,,,,,
+,1 DNA-ClpX,,,,
+,Component,Sample 1,Sample 2,Sample 3,Control
+,SMix,3,3,3,3
+,PMix,1.2,1.2,1.2,1.2
+,Ribosome,1.8,1.8,1.8,1.8
+,tRNA,1,1,1,1
+,RNase Inhibitor,0.5,0.5,0.5,0.5
+,Purified deGFP-ssrA (41.2 uM),0.5,0.5,0.5,0.5
+,Purified ClpP (79.9 uM),0.5,0.5,0.5,0
+,pOpen-pT7-ClpX-cHis (86 nM),0.5,1,1.5,0
+,Nucleus Free Water,1,0.5,0,2
+,Total,10,10,10,10
+,,,,,
+,1 DNA-deGFP-ssrA,,,,
+,Component,Sample 1,Sample 2,Sample 3,Control
+,SMix,3,3,3,3
+,PMix,1.2,1.2,1.2,1.2
+,Ribosome,1.8,1.8,1.8,1.8
+,tRNA,1,1,1,1
+,RNase Inhibitor,0.5,0.5,0.5,0.5
+,pOpen-pT7-deGFP ssrA (63.5 ng/ul),0.5,1,1.5,0.5
+,Purified ClpP (79.9 uM),0.5,0.5,0.5,0
+,Purified ClpX (53.7 uM),0.5,0.5,0.5,0
+,Nucleus Free Water,1,0.5,0,2
+,Total,10,10,10,10
+,,,,,
+,,,,,
+Cells,Component,Sample,Control,,
+Outer solution: 1089 mM Glucose,SMix,9,9,,
+,PMix,3.6,3.6,,
+,Ribosome,5.4,5.4,,
+,tRNA,3,3,,
+,RNase Inhibitor,1.5,1.5,,
+,Purified deGFP-ssrA (41.2 uM),0.3,0.3,,
+,pOpen-pT7-ClpP-cHis (40 nM),1.5,0,,
+,Purified ClpX (53.7 uM),0.6,0.6,,
+,Optiprep,0.6,0.6,,
+,Nucleus Free Water,4.5,6,,
+,Total,30,30,,
