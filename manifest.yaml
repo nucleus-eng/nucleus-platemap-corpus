@@ -235,6 +235,7 @@ corpus:
   - path: fixtures/synthetic/off-plate-well.csv
     disclosure: cleared
     origin: "generated"
+    plate_format: 96
     added_for: >
       Well ID that does not exist on the declared plate format (e.g. A25 on
       a 96-well plate). Silently dropped by the inner join.
@@ -253,3 +254,124 @@ corpus:
       - check: duplicate_wells
         tier: derived
         expected: blocking
+
+  # ── Added by nucleus-skills, 2026-09-02 ───────────────────────────────────
+  # Synthetic cases for checks the corpus did not yet cover. All verified
+  # against check-platemap.py at nucleus-skills@feat/build-platemap-skill --
+  # each fires the finding claimed below, and the two that did not fire on
+  # first writing were fixed rather than shipped.
+
+  - path: fixtures/synthetic/ambiguous-date.csv
+    disclosure: cleared
+    origin: "generated"
+    added_for: >
+      Date written 01/02/25. Month/day or day/month is unrecoverable, and the
+      year has no century. Unlike a merely non-standard format this cannot be
+      repaired by a later reader, which is why it warrants more than a note.
+      The source DevNote names mm/dd/yy and dd/mm/yy explicitly as formats to
+      avoid "due to differences in use by country".
+    findings:
+      - check: date_format
+        tier: derived
+        expected: warn
+
+  - path: fixtures/synthetic/mixed-date-formats.csv
+    disclosure: cleared
+    origin: "generated"
+    added_for: >
+      Two date formats in one platemap. Distinct from a single bad format:
+      whichever convention is right, they cannot both be, so at least one row
+      is wrong no matter how the file is read.
+    findings:
+      - check: date_format_consistency
+        tier: derived
+        expected: warn
+
+  - path: fixtures/synthetic/opaque-sourced-zero.csv
+    disclosure: cleared
+    origin: "generated"
+    added_for: >
+      A row using a commercial kit (Sol A/Sol B) carries 0 for [HEPES] and
+      [NTP], which that kit supplies. Zero asserts absence; the honest value
+      is blank. Every total balances and every concentration is arithmetically
+      consistent, so no arithmetic check fires -- the file is wrong in a way
+      that looks entirely correct. Two agents produced this error
+      independently on the same real experiment from different inputs.
+      Detected structurally, with no list of kit names to maintain: a
+      concentration column that is zero only on rows containing something no
+      other row has.
+    findings:
+      - check: substituted_zero
+        tier: derived
+        expected: warn
+
+  - path: fixtures/synthetic/submix-double-counted.csv
+    disclosure: cleared
+    origin: "generated"
+    added_for: >
+      A named sub-mix expanded into its components while its own roll-up
+      column is kept. Components then sum to 13.33 uL against a stated 10.
+      The fix is that the parts REPLACE the roll-up; the roll-up survives as
+      provenance, not as a volume.
+    findings:
+      - check: nested_mastermix_expansion
+        tier: derived
+        expected: warn
+
+  # ── Real fixtures held for disclosure ─────────────────────────────────────
+
+  - path: pending
+    disclosure: pending
+    origin: "ELN page, PPK energy module + ClpXP control module, 2026-01-16"
+    instruments: [platereader]
+    plate_format: 384
+    added_for: >
+      Three things no other fixture carries. A sub-mix (3X Energy Mix) defined
+      on the same page as the reactions drawing on it, so it is genuinely
+      expandable. One cell reading "11.67 (3.5 tRNA) (8.17)" -- two equivalent
+      formulations in a single cell, where 8.17 + 3.5 = 11.67 and tRNA is 30%
+      of the mix; any parser takes the first number and silently discards the
+      alternative. And a premix named "Energy solution-CP" that contains no
+      creatine phosphate, so its name asserts something false about its
+      contents.
+    findings:
+      - check: nested_mastermix_expansion
+        tier: confirmed
+        expected: pass
+      - check: multi_valued_cell
+        tier: asserted
+        expected: warn
+
+  - path: pending
+    disclosure: pending
+    origin: "platemap supplied directly by the experimentalist, PPK run, 2025-06-12"
+    instruments: [platereader]
+    plate_format: 384
+    added_for: >
+      A real bench layout, which no synthetic case reproduces: rows A, C, E,
+      G, I and columns 19, 21, 23 -- every other well on both axes, and
+      deliberately on the plate edge in row A. It is the counter-example to
+      any check that treats a tidy layout as suspicious, and the reference for
+      what real spacing looks like. Also a minimal platemap: Well, Experiment,
+      Name and a binary design-factor column, with no Date, Type or volume.
+    findings:
+      - check: edge_margin
+        tier: confirmed
+        expected: warn
+      - check: has_well_column
+        tier: confirmed
+        expected: pass
+
+  - path: pending
+    disclosure: pending
+    origin: "kinetics intro devnote, experiments/platemap.csv"
+    instruments: [platereader]
+    plate_format: 384
+    added_for: >
+      Dates written 11/19/25 across nine rows. Resolvable as a day, since 19
+      is not a month, but the century is not -- so it exercises the milder
+      half of the date rule against ambiguous-date.csv's severe half.
+    findings:
+      - check: date_format
+        tier: confirmed
+        expected: warn
