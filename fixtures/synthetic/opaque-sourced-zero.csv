@@ -1,0 +1,4 @@
+Date,Experiment,Well,Name,Type,Rxn Volume (uL),SMix Vol (uL),PMix Vol (uL),Sol A Vol (uL),Sol B Vol (uL),Water Vol (uL),[HEPES] (mM),[NTP] (mM)
+2026-09-01,20260901-opaque-zero,B2,Nucleus PURE,Sample,10,3.0,1.2,0,0,2.0,50,2
+2026-09-01,20260901-opaque-zero,B4,Nucleus PURE,Sample,10,3.0,1.2,0,0,2.0,50,2
+2026-09-01,20260901-opaque-zero,B6,NEB PURExpress,Positive Control,10,0,0,4.0,3.0,3.0,0,0
